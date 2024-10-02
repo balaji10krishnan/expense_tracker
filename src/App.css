@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+:root {
+  --primary-color: #6f6571;
+  --fs-200: clamp(0.78rem, calc(0.71rem + 0.35vw), 0.96rem);
+  --fs-300: clamp(0.94rem, calc(0.84rem + 0.51vw), 1.2rem);
+  --fs-400: clamp(1.13rem, calc(0.98rem + 0.73vw), 1.5rem);
+  --fs-500: clamp(1.94rem, calc(1.56rem + 1.92vw), 2.93rem);
+  --fs-600: clamp(2.8rem, calc(2.11rem + 3.47vw), 4.58rem);
+  --primary-color: #7abf90;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  padding: 0;
+  margin: 0;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.fs-600 {
+  font-size: var(--fs-600);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.fs-500 {
+  font-size: var(--fs-500);
+}
+.fs-400 {
+  font-size: var(--fs-400);
+}
+.fs-300 {
+  font-size: var(--fs-300);
+}
+.fs-200 {
+  font-size: var(--fs-200);
+}
+.fw-b {
+  font-weight: 700;
+}
+.btn-black {
+  display: block;
+  background-color: #5d5360;
   color: white;
+  outline: none;
+  border: none;
+  font-size: var(--fs-200);
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  transition: 0.5s;
 }
-
-.App-link {
-  color: #61dafb;
+.btn-black:hover {
+  border: 2px solid white;
+  outline: 2px solid #5d5360;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mt-15 {
+  margin-top: 15px;
+}
+.mb-15 {
+  margin-bottom: 15px;
 }
