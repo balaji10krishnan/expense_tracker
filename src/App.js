@@ -4,15 +4,16 @@ import { TextField, ThemeProvider } from "@mui/material";
 import MainRouter from "./routes/MainRouter";
 import Header from "./features/Header/Header";
 import { theme } from "./styles/theme";
+import { useState } from "react";
+import BudjetContextProvider from "./context/BudjetContext";
 
 function App() {
   return (
-    <>
+    <BudjetContextProvider>
       <ThemeProvider theme={theme}>
-        <Header />
         <MainRouter />
       </ThemeProvider>
-    </>
+    </BudjetContextProvider>
   );
 }
 

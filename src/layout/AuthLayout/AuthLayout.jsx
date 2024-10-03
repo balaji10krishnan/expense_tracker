@@ -1,13 +1,24 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { BudjetContext } from "../../context/BudjetContext";
+import Header from "../../features/Header/Header";
 
 const AuthLayout = () => {
+  const { userName } = useContext(BudjetContext);
+  console.log("username", userName);
+
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (!localStorage.getItem("userName")) {
+    if (!userName) {
       navigate("/");
     }
   }, []);
-  return <Outlet />;
+  return (
+    <>
+      {" "}
+      <Header /> <Outlet />
+    </>
+  );
 };
 export default AuthLayout;

@@ -47,6 +47,25 @@
   border: 2px solid white;
   outline: 2px solid #5d5360;
 }
+
+.btn-error {
+  display: block;
+  background-color: #fc8d94;
+  color: white;
+  outline: none;
+  border: none;
+  font-size: var(--fs-200);
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  transition: 0.5s;
+}
+.btn-error:hover {
+  border: 2px solid white;
+  outline: 2px solid #fc8d94;
+}
 .mt-15 {
   margin-top: 15px;
 }
