@@ -66,9 +66,21 @@
   border: 2px solid white;
   outline: 2px solid #fc8d94;
 }
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
 .mt-15 {
   margin-top: 15px;
 }
 .mb-15 {
   margin-bottom: 15px;
+}
+.border-card {
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 2em;
+  background-color: #f2fff6;
 }
