@@ -66,6 +66,25 @@
   border: 2px solid white;
   outline: 2px solid #fc8d94;
 }
+
+.btn-color {
+  display: block;
+  background-color: hsl(var(--color));
+  color: white;
+  outline: none;
+  border: none;
+  font-size: var(--fs-200);
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  transition: 0.5s;
+}
+.btn-color:hover {
+  border: 2px solid white;
+  outline: 2px solid hsl(var(--color));
+}
 .mt-20 {
   margin-top: 20px;
 }
