@@ -5,7 +5,8 @@ import { useContext, useEffect } from "react";
 import { BudjetContext } from "../../context/BudjetContext";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const { userName, setUserName } = useContext(BudjetContext);
+  const { userName, setUserName, setExpenses, setBudgets } =
+    useContext(BudjetContext);
   const navigate = useNavigate();
   return (
     <>
@@ -27,6 +28,8 @@ const Header = () => {
             style={{ alignSelf: "center" }}
             onClick={() => {
               setUserName(null);
+              setBudgets([]);
+              setExpenses([]);
               navigate("/");
             }}
           >

@@ -93,6 +93,8 @@ const BudjetContextProvider = ({ children }) => {
       value={{
         userName,
         setUserName,
+        setBudgets,
+        setExpenses,
         budgets,
         expenses,
         addBudgets,

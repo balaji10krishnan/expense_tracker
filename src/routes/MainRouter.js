@@ -3,6 +3,7 @@ import Login from "../pages/Login/Login";
 import AuthLayout from "../layout/AuthLayout/AuthLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import BudgetDetail from "../pages/BudgetDetail/BudgetDetail";
+import NotFound from "../features/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         element: <BudgetDetail />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
