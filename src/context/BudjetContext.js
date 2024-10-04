@@ -1,6 +1,5 @@
 import { createContext } from "react";
 import useLocalStorage from "../hook/use-localstorage";
-import { v4 as uuidv4 } from "uuid";
 export const BudjetContext = createContext();
 const BudjetContextProvider = ({ children }) => {
   const [userName, setUserName] = useLocalStorage("userName", null);
@@ -9,6 +8,9 @@ const BudjetContextProvider = ({ children }) => {
 
   const generateRandomColor = (val) => {
     return `${val * 34} 55% 40%`;
+  };
+  const randomId = () => {
+    return `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   };
   function createDate() {
     const date = new Date();
@@ -19,10 +21,23 @@ const BudjetContextProvider = ({ children }) => {
     return `${day}/${month}/${year}`;
   }
   const addBudgets = (budget, cost) => {
+    console.log("randomId", randomId());
+    const id = randomId();
+    console.log([
+      ...budgets,
+      {
+        budgetId: id,
+        budget,
+        cost,
+        color: generateRandomColor(budgets.length),
+        createAt: createDate(),
+      },
+    ]);
+
     setBudgets([
       ...budgets,
       {
-        id: uuidv4(),
+        budgetId: id,
         budget,
         cost,
         color: generateRandomColor(budgets.length),
@@ -35,13 +50,15 @@ const BudjetContextProvider = ({ children }) => {
     setExpenses([
       ...expenses,
       {
-        id: uuidv4(),
+        expenseId: randomId(),
         expense,
         cost,
         budgetId,
         createAt: createDate(),
       },
     ]);
+    console.log("addexpense");
+    console.log("budget", budgets);
   };
 
   const calculateSpentByBudget = (budgetId) => {
@@ -54,7 +71,22 @@ const BudjetContextProvider = ({ children }) => {
     return total;
   };
   const getBudget = (budgetId) => {
-    return budgets.filter((item) => (item.id = budgetId));
+    return budgets.filter((item) => item.budgetId == budgetId);
+  };
+  const getExpenseByBudget = (budgetId) => {
+    return expenses.filter((item) => item.budgetId == budgetId);
+  };
+  const deleteExpense = (expenseId) => {
+    const filterExpense = expenses.filter(
+      (item) => item.expenseId !== expenseId
+    );
+    setExpenses(filterExpense);
+  };
+  const deleteBudget = (budgetId) => {
+    const filterBudget = budgets.filter((item) => item.budgetId !== budgetId);
+    setBudgets(filterBudget);
+    const filterExpense = expenses.filter((item) => item.budgetId !== budgetId);
+    setExpenses(filterExpense);
   };
   return (
     <BudjetContext.Provider
@@ -67,6 +99,9 @@ const BudjetContextProvider = ({ children }) => {
         addExpense,
         calculateSpentByBudget,
         getBudget,
+        deleteExpense,
+        getExpenseByBudget,
+        deleteBudget,
       }}
     >
       {children}

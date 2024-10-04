@@ -10,7 +10,12 @@ const Header = () => {
   return (
     <>
       <header className={classes.nav}>
-        <div className={classes.logo}>
+        <div
+          className={classes.logo}
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        >
           <img src={logo} height={30} />
           <Typography className={`${classes.title} fs-400 fw-b`} variant="p">
             Budget Tracker

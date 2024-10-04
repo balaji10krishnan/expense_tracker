@@ -2,10 +2,12 @@ import { LinearProgress, Stack } from "@mui/material";
 import classes from "./BudgetCard.module.css";
 import { useContext } from "react";
 import { BudjetContext } from "../../context/BudjetContext";
-const BudgetCard = ({ budget }) => {
-  const { budget: budgetName, id, color, cost } = budget;
-  const { calculateSpentByBudget } = useContext(BudjetContext);
-  const spent = calculateSpentByBudget(id);
+import { useNavigate } from "react-router-dom";
+const BudgetCard = ({ budget, deleteAction = false }) => {
+  const { budget: budgetName, budgetId, color, cost } = budget;
+  const { calculateSpentByBudget, deleteBudget } = useContext(BudjetContext);
+  const navigate = useNavigate();
+  const spent = calculateSpentByBudget(budgetId);
   return (
     <div style={{ "--color": color }}>
       <div className={classes["budget-card"]}>
@@ -43,7 +45,26 @@ const BudgetCard = ({ budget }) => {
           justifyContent={"center"}
           style={{ marginTop: "1em" }}
         >
-          <button className="btn-color">View Details</button>
+          {deleteAction ? (
+            <button
+              className="btn-color"
+              onClick={() => {
+                deleteBudget(budgetId);
+                navigate("/");
+              }}
+            >
+              Delete Budget
+            </button>
+          ) : (
+            <button
+              className="btn-color"
+              onClick={() => {
+                navigate("/budget", { state: { id: budgetId } });
+              }}
+            >
+              View Details
+            </button>
+          )}
         </Stack>
       </div>
     </div>

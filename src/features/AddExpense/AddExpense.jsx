@@ -3,8 +3,10 @@ import { BudjetContext } from "../../context/BudjetContext";
 import classes from "./AddExpense.module.css";
 import { MenuItem, Stack, TextField } from "@mui/material";
 import useInput from "../../hook/use-input";
+import { useLocation } from "react-router-dom";
 const AddExpense = () => {
   const { budgets, addExpense } = useContext(BudjetContext);
+  const location = useLocation();
   const [budget, setBudget] = useState("");
   const {
     value: expense,
@@ -34,12 +36,12 @@ const AddExpense = () => {
     );
   });
   useEffect(() => {
-    setBudget(budgets[0]?.id);
+    setBudget(budgets[0]?.budgetId);
   }, []);
 
   const handleExpense = () => {
     if (costIsValid && expenseIsValid) {
-      addExpense(budget, expense, cost);
+      addExpense(location?.state?.id || budget, expense, cost);
       resetExpenseInput();
       resetCostInput();
     } else {
@@ -79,7 +81,7 @@ const AddExpense = () => {
           fullWidth
         />
       </Stack>
-      {budgets.length > 1 && (
+      {budgets.length > 1 && !location?.state?.id && (
         <TextField
           select
           label="Select Budget"
@@ -94,7 +96,7 @@ const AddExpense = () => {
         >
           {budgets?.map((budget, i) => {
             return (
-              <MenuItem value={budget.id} key={budget.id}>
+              <MenuItem value={budget.budgetId} key={i}>
                 {budget?.budget}
               </MenuItem>
             );

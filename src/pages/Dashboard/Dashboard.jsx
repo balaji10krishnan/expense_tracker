@@ -6,9 +6,11 @@ import classes from "./Dashboard.module.css";
 import { BudjetContext } from "../../context/BudjetContext";
 import BudgetCard from "../../features/BudgetCard/BudgetCard";
 import ExpenseTable from "../../features/ExpenseTable/ExpenseTable";
-import { colors } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
-  const { budgets, expenses, getBudget } = useContext(BudjetContext);
+  const navigate = useNavigate();
+  const { budgets, expenses, getBudget, deleteExpense } =
+    useContext(BudjetContext);
   const columns = ["Name", "Amount", "Date", "Budget", "Action"];
   const rowKey = [
     { key: "expense" },
@@ -28,13 +30,30 @@ const Dashboard = () => {
               borderRadius: "12px",
               cursor: "pointer",
             }}
+            onClick={() => {
+              navigate(`/budget`, { state: { id: budget[0]?.budgetId } });
+            }}
           >
             {budget[0]?.budget}
           </div>
         );
       },
     },
-    { key: "action", renderCell: () => {} },
+    {
+      key: "action",
+      renderCell: (data) => {
+        return (
+          <button
+            onClick={() => {
+              deleteExpense(data.expenseId);
+            }}
+            className="btn-error"
+          >
+            Delete
+          </button>
+        );
+      },
+    },
   ];
   return (
     <section className={classes["dashboard-container"]}>
@@ -49,8 +68,8 @@ const Dashboard = () => {
             <p className="fs-500 fw-b mt-20 mb-20">Existing Budgets</p>
             <div className={classes["grid-item"]}>
               {" "}
-              {budgets.map((budget) => {
-                return <BudgetCard budget={budget} />;
+              {budgets.map((budget, i) => {
+                return <BudgetCard budget={budget} key={i} />;
               })}
             </div>
           </>

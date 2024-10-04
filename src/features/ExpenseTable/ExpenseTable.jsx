@@ -27,39 +27,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function ExpenseTable({ columns = [], rows = [], rowKey = [] }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {columns?.map((column) => (
-              <StyledTableCell>{column}</StyledTableCell>
+            {columns?.map((column, i) => (
+              <StyledTableCell key={i}>{column}</StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, i) => (
             <StyledTableRow key={i}>
-              {rowKey.map((item) =>
+              {rowKey.map((item, i) =>
                 item.renderCell ? (
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell component="th" scope="row" key={i}>
                     {item.renderCell(row)}
                   </StyledTableCell>
                 ) : (
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell component="th" scope="row" key={i}>
                     {row[item.key]}
                   </StyledTableCell>
                 )

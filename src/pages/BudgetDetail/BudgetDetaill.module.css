@@ -1,0 +1,10 @@
+.budget-container {
+  max-width: 1440px;
+  padding-inline: 30px;
+  margin-inline: auto;
+}
+.grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
