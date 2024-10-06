@@ -19,7 +19,7 @@ const Header = () => {
         >
           <img src={logo} height={30} />
           <Typography className={`${classes.title} fs-400 fw-b`} variant="p">
-            Budget Tracker
+            Expense Tracker
           </Typography>
         </div>
         {userName && (
